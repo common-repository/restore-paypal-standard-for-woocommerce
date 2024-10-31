@@ -1,0 +1,38 @@
+{
+    "landingPage": "/wp-admin/admin.php?page=wc-settings&tab=checkout&section=paypal",
+    "features": {
+        "networking": true
+    },
+    "steps": [
+        {
+            "step": "login",
+            "username": "admin",
+            "password": "password"
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "woocommerce"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "restore-paypal-standard-for-woocommerce"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "writeFile",
+            "path": "/wordpress/wp-content/mu-plugins/playground-notice.php",
+            "data": "<?php add_filter( 'woocommerce_prevent_automatic_wizard_redirect', '__return_true' ); add_action( 'admin_notices', function() { echo '<div class=\"notice notice-info is-dismissible\"><p>This is a live preview of <strong>Restore PayPal Standard For WooCommerce</strong>, powered by <a href=\"https://wordpress.org/playground/\" target=\"_blank\">WordPress Playground</a>.</p></div>'; } );"
+        }
+    ]
+}
